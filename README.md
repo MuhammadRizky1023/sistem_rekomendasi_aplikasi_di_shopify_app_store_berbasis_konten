@@ -1,7 +1,7 @@
 # Laporan Proyek Rekomendasi bedasarkan Content Shopify - Muhammad Rizky
 
 ## Domain Proyek
-Rekomendasi bedasarkan content adalah elemen kunci dalam platform e-commerce yang dapat meningkatkan konversi dan kepuasan pelanggan. Dengan menggunakan teknik rekomendasi yang efektif, seperti Content-Based Filtering, kita dapat membantu pelanggan menemukan produk yang sesuai dengan preferensi mereka berdasarkan karakteristik produk. Proyek ini bertujuan untuk membangun sistem rekomendasi berbasis Content-Based Filtering untuk meningkatkan pengalaman pengguna dan keterlibatan mereka di platform Shopify.
+Rekomendasi bedasarkan content adalah elemen kunci dalam platform e-commerce yang dapat meningkatkan konversi dan kepuasan pelanggan. Dengan menggunakan teknik rekomendasi yang efektif, seperti Content-Based Filtering, kita dapat membantu pelanggan menemukan produk yang sesuai dengan preferensi mereka berdasarkan karakteristik produk. Proyek ini bertujuan untuk membangun sistem rekomendasi berbasis Content-Based Filtering untuk meningkatkan pengalaman pengguna dan keterlibatan pengguna di platform Shopify.
 
 ## Business Understanding
 ### Problem Statements
@@ -50,16 +50,15 @@ Grafik Tersebut Distribusi ulasan membantu mengidentifikasi aplikasi yang paling
    - Sebagian besar produk memiliki rating di atas 3, menandakan bahwa produk memiliki reputasi yang baik.
    - Produk dengan ulasan terbanyak cenderung populer dan dapat dijadikan bahan rekomendasi.
 
-## Data Preprocessing
-Tahapan Data Preprocessing untuk menangani nilai hilang dan menghapus data duplikat. Menangani nilai yang hilang bisa dengan rata-rata atau median.
-### Menangani nilai yang hilang
+## Data Preparation
+ Pada tahap ini, harus menangani nilai hilang dan menghapus data duplikat. Menangani nilai yang hilang bisa dengan rata-rata atau median. serta akan menggabungkan kolom teks yang relevan, seperti title, description, dan tagline menjadi satu kolom content untuk representasi yang lebih kaya.
+ 
+ ### Menangani nilai yang hilang
       df_apps.fillna({'rating': df_apps['rating'].mean()}, inplace=True)# Mengisi nilai hilang pada rating dengan rata-rata
 
 ### Memeriksa nilai duplikat
     df_apps.drop_duplicates(subset='title', keep='first', inplace=True)
 
-## Data Preparation
- Pada tahap ini, Anda akan menggabungkan kolom teks yang relevan, seperti title, description, dan tagline menjadi satu kolom content untuk representasi yang lebih kaya.
 ### 1. Membuat Kolom Konten
           from sklearn.feature_extraction.text import TfidfVectorizer
           df_apps['content'] = df_apps['title'] + " " + df_apps['description'] + " " + df_apps['tagline'] 
@@ -130,7 +129,8 @@ Recall at 5: 55.56%
 
 - **Precision at K**:  Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas.
 - **Recall at K**: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan.
-- 
+
+### Dampak Model Terhadap Tujuan Bisnis
 Evaluasi menunjukkan bahwa model memberikan rekomendasi produk yang cukup relevan. Dampak pada Business Understanding:
 - Model ini berhasil menjawab problem statement dengan memberikan rekomendasi aplikasi yang serupa dari segi fungsi.
   Rekomendasi yang relevan mampu meningkatkan keterlibatan pengguna dan mendukung goals untuk memudahkan pengguna menemukan aplikasi sesuai kebutuhan.
