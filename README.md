@@ -21,15 +21,22 @@ Variabel target dalam dataset ini dapat digunakan untuk menganalisis popularitas
 Dataset ini mencakup data aplikasi Shopify, termasuk informasi seperti **id**, **title**, **developer**, **rating**, **reviews_count**, **description**, dan **tagline**. Dataset ini memungkinkan analisis karakteristik produk untuk memberikan rekomendasi yang akurat.
 
 ### Struktur Data
-| **Fitur**         | **Deskripsi**                                                               |
-|-------------------|-----------------------------------------------------------------------------|
-| **id**            | ID unik untuk setiap aplikasi                                               |
-| **title**         | Nama aplikasi                                                               |
-| **developer**     | Pengembang atau perusahaan yang membuat aplikasi                            |
-| **rating**        | Rating rata-rata aplikasi berdasarkan ulasan pengguna                       |
-| **reviews_count** | Jumlah ulasan yang diterima oleh aplikasi                                   |
-| **description**   | Deskripsi aplikasi                                                          |
-| **tagline**       | Ringkasan singkat aplikasi                                                  |
+| **Fitur**          | **Deskripsi**                                                               | **Type**     |
+|--------------------|-----------------------------------------------------------------------------|--------------|
+| **id**             | ID unik untuk setiap aplikasi                                               | `object`     |
+| **url**            | URL aplikasi                                                                | `object`     |
+| **title**          | Nama aplikasi                                                               | `object`     |
+| **developer**      | Pengembang atau perusahaan yang membuat aplikasi                            | `object`     |
+| **developer_link** | URL profil pengembang                                                      | `object`     |
+| **icon**           | URL ikon aplikasi                                                           | `object`     |
+| **rating**         | Rating rata-rata aplikasi berdasarkan ulasan pengguna                       | `float64`    |
+| **reviews_count**  | Jumlah ulasan yang diterima oleh aplikasi                                   | `int64`      |
+| **description_raw**| Deskripsi aplikasi mentah                                                  | `object`     |
+| **description**    | Deskripsi aplikasi                                                          | `object`     |
+| **tagline**        | Ringkasan singkat aplikasi                                                  | `object`     |
+| **pricing_hint**   | Informasi harga aplikasi                                                    | `object`     |
+| **lastmod**        | Tanggal terakhir aplikasi diperbarui                                         | `object`     |
+| **chat_gpt**       | Interaksi atau input yang diberikan kepada ChatGPT                          | `object`     |
 
 ### Kondisi Data
 - **Missing Values**: Tidak ada nilai kosong dalam dataset ini.
@@ -68,6 +75,14 @@ Grafik Tersebut Distribusi ulasan membantu mengidentifikasi aplikasi yang paling
 
 ## Model Development: Content-Based Filtering
 Pendekatan Content-Based Filtering menganalisis kesamaan antara fitur aplikasi (seperti kategori, deskripsi, dan rating) untuk memberikan rekomendasi yang mirip dengan aplikasi yang telah disukai oleh pengguna.
+## Pendekatan yang Digunakan
+### 1. TF-IDF Vectorization
+TF-IDF (Term Frequency-Inverse Document Frequency) digunakan untuk mengubah deskripsi aplikasi menjadi representasi vektor. Teknik ini membantu menekankan kata-kata yang lebih relevan dalam konteks dokumen tertentu dengan cara:
+- **Term Frequency (TF)**: Mengukur seberapa sering suatu kata muncul dalam dokumen.
+- **Inverse Document Frequency (IDF)**: Memberikan bobot lebih kepada kata yang jarang muncul di banyak dokumen.
+### 2. Cosine Similarity
+Cosine Similarity digunakan untuk mengukur kesamaan antara vektor aplikasi yang telah dianalisis dengan aplikasi lain di dalam dataset. Nilai yang lebih mendekati 1 menunjukkan kemiripan yang tinggi, sedangkan nilai mendekati 0 menunjukkan perbedaan.
+
 ## Import Libarary untuk model
      from sklearn.metrics.pairwise import cosine_similarity
      import pandas as pd
