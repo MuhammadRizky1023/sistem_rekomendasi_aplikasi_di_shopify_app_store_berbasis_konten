@@ -39,9 +39,11 @@ Dataset ini mencakup data aplikasi Shopify, termasuk informasi seperti **id**, *
 EDA bertujuan untuk memahami karakteristik dan pola dalam data, seperti distribusi rating aplikasi, jumlah ulasan yang telah di terima.
 
 ### Distribusi bedasarkan rating
+Grafik tersebut Menunjukkan sebaran rating aplikasi yang diulas, memberi gambaran tentang kualitas rata-rata aplikasi di platform Shopify
 ![distribusi_rating](https://github.com/user-attachments/assets/c4e18652-b3d3-46fe-afd7-ab996db6873f)
 
 ### Distribusi bedasarkan ulasan
+Grafik Tersebut Distribusi ulasan membantu mengidentifikasi aplikasi yang paling populer berdasarkan interaksi pengguna. 
 ![distribusi_ulasan](https://github.com/user-attachments/assets/fd1f2956-e599-4cca-af99-f4f8182377fa)
 
 ## Data Preprocessing
@@ -62,34 +64,69 @@ Tahapan Data Preprocessing untuk menangani nilai hilang dan menghapus data dupli
          matrix_vector = vector.fit_transform(df_apps['content'])
 
 ## Model Development: Content-Based Filtering
-Content-Based Filtering menganalisis kesamaan antara fitur aplikasi (seperti kategori, deskripsi, dan rating) untuk memberikan rekomendasi yang mirip dengan aplikasi yang telah disukai oleh pengguna.
+from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
+# 3. Menghitung Cosine Similarity
+cosine_sim = cosine_similarity(matrix_vector, matrix_vector)
+
+# 4. Fungsi Rekomendasi
+def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
+    try:
+        # Mendapatkan index aplikasi berdasarkan judul
+        app_title = df_apps[df_apps['title'] == app_title].index[0]
+
+        # Mendapatkan skor similarity untuk semua aplikasi
+        sim_scores = list(enumerate(cosine_sim[app_title]))
+
+        # Mengurutkan aplikasi berdasarkan skor similarity
+        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+
+        # Mengambil aplikasi dengan similarity tertinggi (kecuali aplikasi itu sendiri)
+        sim_scores = sim_scores[1:12]  # Ambil 10 teratas
+
+        # Mendapatkan judul aplikasi yang mirip
+        title_similirarity = [i[0] for i in sim_scores]
+        simililarity_scores = [round(i[1] * 100, 2) for i in sim_scores]
+
+        recommended_apps = pd.DataFrame({
+            'judul': df_apps['title'].iloc[title_similirarity].values,
+            'Kemiripan (%)': simililarity_scores
+        })
+        print("Daftar Rekomendasi Produk Berdasarkan Kemiripan\n")
+        print(recommended_apps.to_markdown(index=False))
+        # Mengembalikan rekomendasi judul aplikasi
+        return recommended_apps
+    except IndexError:
+        return "Tidak Memiliki Rekomendasi"
 
 - **TF-IDF Vectorization**: Teknik ini digunakan untuk mengubah deskripsi aplikasi menjadi vektor, sehingga kesamaan antar aplikasi dapat dihitung.
 - **Cosine Similarity**: Cosine Similarity digunakan untuk mengukur kesamaan antara aplikasi yang telah diberi rating tinggi oleh pengguna dan aplikasi lainnya. Aplikasi dengan skor kemiripan tertinggi kemudian direkomendasikan.
 
-## Evaluation Model
-menampilkan hasil rekomendasi beserta kemiripannya dengan model yang telah di buat.
-# JewelExchange Product Feed API Recommendation
+## Evaluation Result
+Daftar Rekomendasi Produk Berdasarkan Kemiripan
 
-Rekomendasi berikut disusun berdasarkan tingkat kemiripan aplikasi dengan *JewelExchange Product Feed API*, bertujuan untuk membantu pengguna menemukan alternatif produk atau fitur serupa di platform Shopify. Aplikasi-aplikasi ini memiliki kemiripan dalam fungsi pengelolaan produk, manajemen stok, dan integrasi feed.
+| judul                         |   Kemiripan (%) |
+|:------------------------------|----------------:|
+| Search Veil                   |           83.86 |
+| Affiliate Product Feed        |           82.82 |
+| Feeds Bridge                  |           78.68 |
+| Auto Hide Sold‑out Products   |           78.56 |
+| Nostock‑Noshow                |           78.44 |
+| IconEcom: Print On Demand     |           77.74 |
+| Push Down & Hide Out of Stock |           76.49 |
+| Simple Bulk Price Editor      |           76.37 |
+| Ablestar Bulk Product Editor  |           75.13 |
+| Nada: Sort & Hide Sold‑out    |           74.71 |
+| Blog Linker                   |           73.88 |
+Precision at 5: 100.00%
+Recall at 5: 55.56%
+- **Precision at K**:  Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas.
+- **Recall at K**: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan.
+Evaluasi menunjukkan bahwa model memberikan rekomendasi produk yang cukup relevan. Dampak pada Business Understanding:
 
-## Daftar Rekomendasi Produk Berdasarkan Kemiripan
-
-| **Judul**                          | **Kemiripan (%)** |
-|------------------------------------|--------------------|
-| Search Veil                        | 83.86             |
-| Affiliate Product Feed             | 82.82             |
-| Feeds Bridge                       | 78.68             |
-| Auto Hide Sold‑out Products        | 78.56             |
-| Nostock‑Noshow                     | 78.44             |
-| IconEcom: Print On Demand          | 77.74             |
-| Push Down & Hide Out of Stock      | 76.49             |
-| Simple Bulk Price Editor           | 76.37             |
-| Ablestar Bulk Product Editor       | 75.13             |
-| Nada: Sort & Hide Sold‑out         | 74.71             |
-| Blog Linker                        | 73.88             |
-### Evaluation Model dengan matrix Precision at K, Recall at K
-precision at k: Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas, dinyatakan dalam persen. recall at k: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan, juga dalam bentuk persen.
+  -  Model ini berhasil menjawab problem statement dengan memberikan rekomendasi aplikasi yang serupa dari segi fungsi.
+    Rekomendasi yang relevan mampu meningkatkan keterlibatan pengguna dan mendukung goals untuk memudahkan pengguna menemukan aplikasi sesuai kebutuhan.
+  -  Solusi ini berdampak positif pada pengalaman pengguna dan dapat meningkatkan waktu mereka di platform Shopify.
 
 ## Conclusion
 Kesimpulan dari proyek sistem rekomendasi aplikasi Shopify ini menunjukkan bahwa pendekatan berbasis konten dapat secara efektif mengidentifikasi aplikasi yang memiliki kesamaan fitur atau fungsi yang tinggi, sesuai dengan kebutuhan pengguna. Dengan menghitung kemiripan menggunakan Cosine Similarity, sistem ini mampu memberikan daftar rekomendasi aplikasi dengan tingkat kemiripan tertentu, membantu pengguna menemukan aplikasi yang relevan tanpa harus mencari secara manual. Evaluasi yang dilakukan melalui metrik precision dan recall menunjukkan seberapa baik model ini dalam merekomendasikan aplikasi yang benar-benar relevan, meskipun tantangan seperti ketersediaan data perilaku pengguna tetap menjadi keterbatasan.
