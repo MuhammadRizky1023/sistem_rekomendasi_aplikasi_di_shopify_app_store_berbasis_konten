@@ -64,13 +64,15 @@ Tahapan Data Preprocessing untuk menangani nilai hilang dan menghapus data dupli
          matrix_vector = vector.fit_transform(df_apps['content'])
 
 ## Model Development: Content-Based Filtering
-from sklearn.metrics.pairwise import cosine_similarity
-import pandas as pd
-# 3. Menghitung Cosine Similarity
-cosine_sim = cosine_similarity(matrix_vector, matrix_vector)
+Pendekatan Content-Based Filtering menganalisis kesamaan antara fitur aplikasi (seperti kategori, deskripsi, dan rating) untuk memberikan rekomendasi yang mirip dengan aplikasi yang telah disukai oleh pengguna.
+## Import Libarary untuk model
+     from sklearn.metrics.pairwise import cosine_similarity
+     import pandas as pd
+### Menghitung Cosine Similarity
+   cosine_sim = cosine_similarity(matrix_vector, matrix_vector)
 
-# 4. Fungsi Rekomendasi
-def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
+### Fungsi Rekomendasi
+   def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
     try:
         # Mendapatkan index aplikasi berdasarkan judul
         app_title = df_apps[df_apps['title'] == app_title].index[0]
