@@ -52,13 +52,12 @@ Tahapan Data Preprocessing untuk menangani nilai hilang dan menghapus data dupli
 
 ## Data Preparation
  Pada tahap ini, Anda akan menggabungkan kolom teks yang relevan, seperti title, description, dan tagline menjadi satu kolom content untuk representasi yang lebih kaya.
-           from sklearn.feature_extraction.text import TfidfVectorizer
 ### 1. Membuat Kolom Konten
+          from sklearn.feature_extraction.text import TfidfVectorizer
           df_apps['content'] = df_apps['title'] + " " + df_apps['description'] + " " + df_apps['tagline'] 
 ### 2. Text Preprocessing dan Vectorization
          vector = TfidfVectorizer(stop_words='english', ngram_range=(1, 2), max_df=0.9, min_df=0.2)
-        matrix_vector = vector.fit_transform(df_apps['content'])
-
+         matrix_vector = vector.fit_transform(df_apps['content'])
 
 ## Model Development: Content-Based Filtering
 Content-Based Filtering menganalisis kesamaan antara fitur aplikasi (seperti kategori, deskripsi, dan rating) untuk memberikan rekomendasi yang mirip dengan aplikasi yang telah disukai oleh pengguna.
