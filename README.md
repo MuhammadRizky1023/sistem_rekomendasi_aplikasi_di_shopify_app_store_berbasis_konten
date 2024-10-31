@@ -72,34 +72,34 @@ Pendekatan Content-Based Filtering menganalisis kesamaan antara fitur aplikasi (
    cosine_sim = cosine_similarity(matrix_vector, matrix_vector)
 
 ### Fungsi Rekomendasi
-   def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
-    try:
-        # Mendapatkan index aplikasi berdasarkan judul
-        app_title = df_apps[df_apps['title'] == app_title].index[0]
-
-        # Mendapatkan skor similarity untuk semua aplikasi
-        sim_scores = list(enumerate(cosine_sim[app_title]))
-
-        # Mengurutkan aplikasi berdasarkan skor similarity
-        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-
-        # Mengambil aplikasi dengan similarity tertinggi (kecuali aplikasi itu sendiri)
-        sim_scores = sim_scores[1:12]  # Ambil 10 teratas
-
-        # Mendapatkan judul aplikasi yang mirip
-        title_similirarity = [i[0] for i in sim_scores]
-        simililarity_scores = [round(i[1] * 100, 2) for i in sim_scores]
-
-        recommended_apps = pd.DataFrame({
-            'judul': df_apps['title'].iloc[title_similirarity].values,
-            'Kemiripan (%)': simililarity_scores
-        })
-        print("Daftar Rekomendasi Produk Berdasarkan Kemiripan\n")
-        print(recommended_apps.to_markdown(index=False))
-        # Mengembalikan rekomendasi judul aplikasi
-        return recommended_apps
-    except IndexError:
-        return "Tidak Memiliki Rekomendasi"
+    def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
+          try:
+              # Mendapatkan index aplikasi berdasarkan judul
+              app_title = df_apps[df_apps['title'] == app_title].index[0]
+      
+              # Mendapatkan skor similarity untuk semua aplikasi
+              sim_scores = list(enumerate(cosine_sim[app_title]))
+      
+              # Mengurutkan aplikasi berdasarkan skor similarity
+              sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+      
+              # Mengambil aplikasi dengan similarity tertinggi (kecuali aplikasi itu sendiri)
+              sim_scores = sim_scores[1:12]  # Ambil 10 teratas
+      
+              # Mendapatkan judul aplikasi yang mirip
+              title_similirarity = [i[0] for i in sim_scores]
+              simililarity_scores = [round(i[1] * 100, 2) for i in sim_scores]
+      
+              recommended_apps = pd.DataFrame({
+                  'judul': df_apps['title'].iloc[title_similirarity].values,
+                  'Kemiripan (%)': simililarity_scores
+              })
+              print("Daftar Rekomendasi Produk Berdasarkan Kemiripan\n")
+              print(recommended_apps.to_markdown(index=False))
+              # Mengembalikan rekomendasi judul aplikasi
+              return recommended_apps
+          except IndexError:
+              return "Tidak Memiliki Rekomendasi"
 
 - **TF-IDF Vectorization**: Teknik ini digunakan untuk mengubah deskripsi aplikasi menjadi vektor, sehingga kesamaan antar aplikasi dapat dihitung.
 - **Cosine Similarity**: Cosine Similarity digunakan untuk mengukur kesamaan antara aplikasi yang telah diberi rating tinggi oleh pengguna dan aplikasi lainnya. Aplikasi dengan skor kemiripan tertinggi kemudian direkomendasikan.
