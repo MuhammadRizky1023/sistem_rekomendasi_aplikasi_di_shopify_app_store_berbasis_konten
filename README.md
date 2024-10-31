@@ -83,53 +83,77 @@ TF-IDF (Term Frequency-Inverse Document Frequency) digunakan untuk mengubah desk
 ### 2. Cosine Similarity
 Cosine Similarity digunakan untuk mengukur kesamaan antara vektor aplikasi yang telah dianalisis dengan aplikasi lain di dalam dataset. Nilai yang lebih mendekati 1 menunjukkan kemiripan yang tinggi, sedangkan nilai mendekati 0 menunjukkan perbedaan.
 
-## Import Libarary untuk model
+### Import Libarary untuk model
      from sklearn.metrics.pairwise import cosine_similarity
      import pandas as pd
-### Menghitung Cosine Similarity
+#### Menghitung Cosine Similarity
      cosine_sim = cosine_similarity(matrix_vector, matrix_vector)
+ Menghitung tingkat kemiripan antara semua aplikasi berdasarkan fitur yang telah diubah menjadi vektor. Hasilnya adalah matriks yang menunjukkan skor kemiripan antara setiap aplikasi.
 
-### Fungsi Rekomendasi
-    def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
-          try:
-              # Mendapatkan index aplikasi berdasarkan judul
-              app_title = df_apps[df_apps['title'] == app_title].index[0]
-      
-              # Mendapatkan skor similarity untuk semua aplikasi
-              sim_scores = list(enumerate(cosine_sim[app_title]))
-      
-              # Mengurutkan aplikasi berdasarkan skor similarity
-              sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-      
-              # Mengambil aplikasi dengan similarity tertinggi (kecuali aplikasi itu sendiri)
-              sim_scores = sim_scores[1:12]  # Ambil 10 teratas
-      
-              # Mendapatkan judul aplikasi yang mirip
-              title_similirarity = [i[0] for i in sim_scores]
-              simililarity_scores = [round(i[1] * 100, 2) for i in sim_scores]
-      
-              recommended_apps = pd.DataFrame({
-                  'judul': df_apps['title'].iloc[title_similirarity].values,
-                  'Kemiripan (%)': simililarity_scores
-              })
-              print("Daftar Rekomendasi Produk Berdasarkan Kemiripan\n")
-              print(recommended_apps.to_markdown(index=False))
-              # Mengembalikan rekomendasi judul aplikasi
-              return recommended_apps
-          except IndexError:
-              return "Tidak Memiliki Rekomendasi"
-              
-## Menampilkan Top-N Rekomendasi
- memanggil fungsi di atas dengan judul aplikasi yang diinginkan untuk mendapatkan daftar rekomendasi beserta perensentase kemeripannya dengan 10 judul yang berebeda.
-# Contoh penggunaan fungsi
-#Penggunaan
-recommend_app = 'JewelExchange Product Feed API'
-recommendations = recommend_apps(recommend_app)
+## Membuat Fungsi Rekomendasi Model
+### 1. Mendifisikan Fungsi
+      def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
+    
+Mendefinisikan fungsi recommend_apps yang akan memberikan rekomendasi aplikasi berdasarkan judul aplikasi yang dicari.
 
-- **TF-IDF Vectorization**: Teknik ini digunakan untuk mengubah deskripsi aplikasi menjadi vektor, sehingga kesamaan antar aplikasi dapat dihitung.
-- **Cosine Similarity**: Cosine Similarity digunakan untuk mengukur kesamaan antara aplikasi yang telah diberi rating tinggi oleh pengguna dan aplikasi lainnya. Aplikasi dengan skor kemiripan tertinggi kemudian direkomendasikan.
+### 2. Mencari Index Aplikasi
+      try:
+          app_title = df_apps[df_apps['title'] == app_title].index[0]
 
-## Evaluation Result
+Mencari index aplikasi dalam DataFrame berdasarkan judul yang diberikan.
+
+### 3. Menghitung Skor Similarity
+     sim_scores = list(enumerate(cosine_sim[app_title]))
+
+Mencari index aplikasi dalam DataFrame berdasarkan judul yang diberikan.
+
+### 4. Mengurutkan Aplikasi Berdasarkan Skor Similarity
+     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+
+Mengurutkan aplikasi berdasarkan skor kemiripan, dari yang tertinggi ke terendah.
+
+### 5. Mengambil 10 Aplikasi Teratas
+     sim_scores = sim_scores[1:12]  # Ambil 10 teratas
+
+Mengambil 10 aplikasi dengan skor kemiripan tertinggi, kecuali aplikasi yang sedang dicari.
+
+### 6. Mendapatkan Judul dan Skor Kemiripan
+     title_similirarity = [i[0] for i in sim_scores]
+     simililarity_scores = [round(i[1] * 100, 2) for i in sim_scores]
+    
+Menghasilkan daftar judul aplikasi yang mirip dan skor kemiripan yang telah dibulatkan menjadi persentase.
+
+### 7. Membuat DataFrame untuk Rekomendasi
+     recommended_apps = pd.DataFrame({
+    'judul': df_apps['title'].iloc[title_similirarity].values,
+    'Kemiripan (%)': simililarity_scores
+})
+
+Membuat DataFrame baru yang berisi dua kolom: judul aplikasi dan skor kemiripan.
+
+### 8. Menampilkan Hasil Rekomendasi
+    print("Daftar Rekomendasi Produk Berdasarkan Kemiripan\n")
+    print(recommended_apps.to_markdown(index=False))
+
+Mencetak judul untuk hasil rekomendasi dan menampilkan DataFrame dalam format tabel markdown.
+
+### 9. Menangani Kesalahan
+    except IndexError:
+    return "Tidak Memiliki Rekomendasi"
+    
+Menangani kesalahan jika aplikasi yang dicari tidak ada dalam DataFrame dan mengembalikan pesan bahwa tidak ada rekomendasi yang tersedia.
+
+
+## Model Result
+menampilkan hasil rekomendasi beserta kemiripannya dengan model yang telah di buat
+   #Penggunaan
+   recommend_app = 'JewelExchange Product Feed API'
+   recommendations = recommend_apps(recommend_app)
+
+    
+Mencetak judul untuk hasil rekomendasi dan menampilkan DataFrame dalam format tabel markdown
+   
+### Menampilkan Top-N Rekomendasi
 Daftar Rekomendasi Produk Berdasarkan Kemiripan
 
 | judul                         |   Kemiripan (%) |
@@ -148,6 +172,9 @@ Daftar Rekomendasi Produk Berdasarkan Kemiripan
 
 Precision at 5: 100.00%
 Recall at 5: 55.56%
+
+
+## Evaluation Result
 
 - **Precision at K**:  Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas.
 - **Recall at K**: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan.
