@@ -116,7 +116,12 @@ plt.ylabel('Frekuensi')
 plt.savefig('distribusi_ulasan.png')
 plt.show()
 
-"""**Data Preparation**
+"""**Insight dari EDA**
+
+Sebagian besar produk memiliki rating di atas 3, menandakan bahwa produk memiliki reputasi yang baik.
+Produk dengan ulasan terbanyak cenderung populer dan dapat dijadikan bahan rekomendasi.
+
+**Data Preparation**
 
 Tahapan Data Preprocessing untuk menangani nilai hilang dan menghapus data duplikat. Menangani nilai yang hilang bisa dengan rata-rata atau median.
 """
@@ -178,7 +183,7 @@ def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
     except IndexError:
         return "Tidak Memiliki Rekomendasi"
 
-"""**Evaluation Model**
+"""**Model Result**
 
 menampilkan hasil rekomendasi beserta kemiripannya  dengan model yang telah di buat
 """
@@ -219,7 +224,7 @@ recall_percent = recall_at_k(data_recommend, actual_relate_app, k=5)
 print(f"Precision at 5: {precision_percent:.2f}%")
 print(f"Recall at 5: {recall_percent:.2f}%")
 
-"""**Kesimpulan**
+"""**Kesimpuulan**
 
 Kesimpulan dari proyek sistem rekomendasi aplikasi Shopify ini menunjukkan bahwa pendekatan berbasis konten dapat secara efektif mengidentifikasi aplikasi yang memiliki kesamaan fitur atau fungsi yang tinggi, sesuai dengan kebutuhan pengguna. Dengan menghitung kemiripan menggunakan Cosine Similarity, sistem ini mampu memberikan daftar rekomendasi aplikasi dengan tingkat kemiripan tertentu, membantu pengguna menemukan aplikasi yang relevan tanpa harus mencari secara manual. Evaluasi yang dilakukan melalui metrik precision dan recall menunjukkan seberapa baik model ini dalam merekomendasikan aplikasi yang benar-benar relevan, meskipun tantangan seperti ketersediaan data perilaku pengguna tetap menjadi keterbatasan.
 """
