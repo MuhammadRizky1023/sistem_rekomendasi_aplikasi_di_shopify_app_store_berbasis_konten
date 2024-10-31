@@ -16,7 +16,9 @@ Rekomendasi bedasarkan content adalah elemen kunci dalam platform e-commerce yan
 - Menggunakan Content-Based Filtering untuk memberikan rekomendasi berdasarkan kesamaan fitur produk seperti kategori, deskripsi, dan rating.
 
 ## Data Understanding
-Dataset yang digunakan mencakup data aplikasi Shopify, termasuk informasi seperti **id**, **title**, **developer**, **rating**, **reviews_count**, **description**, dan **tagline**. Dataset ini memungkinkan analisis karakteristik produk untuk memberikan rekomendasi yang akurat.
+Dataset yang digunakan pada proyek ini dibuat oleh [usernam3](https://www.kaggle.com/usernam3), yang diunggah ke [Kaggle](https://www.kaggle.com/) pada tahun 2023. Dataset ini dapat ditemukan di [Shopify App Store Dataset](https://www.kaggle.com/datasets/usernam3/shopify-app-store/data).
+Variabel target dalam dataset ini dapat digunakan untuk menganalisis popularitas aplikasi di platform tersebut.
+Dataset ini mencakup data aplikasi Shopify, termasuk informasi seperti **id**, **title**, **developer**, **rating**, **reviews_count**, **description**, dan **tagline**. Dataset ini memungkinkan analisis karakteristik produk untuk memberikan rekomendasi yang akurat.
 
 ### Struktur Data
 | **Fitur**         | **Deskripsi**                                                               |
