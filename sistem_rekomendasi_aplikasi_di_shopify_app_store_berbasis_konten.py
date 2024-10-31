@@ -66,6 +66,11 @@ df_apps.info()
 # Melihat statistik deskriptif
 df_apps.describe()
 
+# Menampilkan jumlah baris dan kolom dalam dataset
+jumlah_baris, jumlah_kolom = df_apps.shape
+print("Jumlah data (baris):", jumlah_baris)
+print("Jumlah fitur (kolom):", jumlah_kolom)
+
 #Mengecheck data duplikat
 data_duplicate = df_apps.duplicated().sum()
 if data_duplicate > 0:
@@ -84,6 +89,8 @@ else:
 """**Univariate Exploratory Data Analysis**
 
 Analisis ini bertujuan untuk memahami distribusi variabel tertentu seperti rating dan reviews_count. Anda dapat menggunakan sns.histplot() untuk melihat pola distribusi data.
+
+Distribusi Berdasarkan Rating: Menunjukkan sebaran rating aplikasi yang diulas, memberi gambaran tentang kualitas rata-rata aplikasi di platform Shopify.
 """
 
 import matplotlib.pyplot as plt
@@ -95,7 +102,10 @@ sns.histplot(df_apps['rating'], bins=20, kde=True)
 plt.title('Distribusi Rating Aplikasi')
 plt.xlabel('Rating')
 plt.ylabel('Frekuensi')
+plt.savefig('distribusi_rating.png')
 plt.show()
+
+"""Distribusi Berdasarkan Jumlah Ulasan: Distribusi ulasan membantu mengidentifikasi aplikasi yang paling populer berdasarkan interaksi pengguna."""
 
 # Visualisasi jumlah ulasan
 plt.figure(figsize=(10, 5))
@@ -103,9 +113,10 @@ sns.histplot(df_apps['reviews_count'], bins=20, kde=True)
 plt.title('Distribusi Jumlah Ulasan Aplikasi')
 plt.xlabel('Jumlah Ulasan')
 plt.ylabel('Frekuensi')
+plt.savefig('distribusi_ulasan.png')
 plt.show()
 
-"""**Data Preprocessing**
+"""**Data Preparation**
 
 Tahapan Data Preprocessing untuk menangani nilai hilang dan menghapus data duplikat. Menangani nilai yang hilang bisa dengan rata-rata atau median.
 """
@@ -116,10 +127,7 @@ df_apps.fillna({'rating': df_apps['rating'].mean()}, inplace=True)# Mengisi nila
 # Memeriksa nilai duplikat
 df_apps.drop_duplicates(subset='title', keep='first', inplace=True)
 
-"""**Data Preparation**
-
-Pada tahap ini, Anda akan menggabungkan kolom teks yang relevan, seperti title, description, dan tagline menjadi satu kolom content untuk representasi yang lebih kaya.
-"""
+"""Pada tahap ini, Anda akan menggabungkan kolom teks yang relevan, seperti title, description, dan tagline menjadi satu kolom content untuk representasi yang lebih kaya."""
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -163,6 +171,8 @@ def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
             'judul': df_apps['title'].iloc[title_similirarity].values,
             'Kemiripan (%)': simililarity_scores
         })
+        print("Daftar Rekomendasi Produk Berdasarkan Kemiripan\n")
+        print(recommended_apps.to_markdown(index=False))
         # Mengembalikan rekomendasi judul aplikasi
         return recommended_apps
     except IndexError:
@@ -175,8 +185,7 @@ menampilkan hasil rekomendasi beserta kemiripannya  dengan model yang telah di b
 
 #Penggunaan
 recommend_app = 'JewelExchange Product Feed API'
-print(f"Rekomendasi untuk '{recommend_app}':")
-print(recommend_apps(recommend_app))
+recommendations = recommend_apps(recommend_app)
 
 """**Evaluation Model dengan matrix Precision at K, Recall at K**
 
@@ -185,7 +194,7 @@ recall at k: Menghitung berapa banyak item relevan yang ter-rekomendasi di antar
 """
 
 # Precision at K Function
-def precision_at_k(recommendations, relate_apps, k=10):
+def precision_at_k(recommendations, relate_apps, k=5):
     precision_recommend = recommendations['judul'].head(k).tolist()
     precision_relevant = len([app for app in precision_recommend if app in relate_apps])
     return (precision_relevant / k) * 100
@@ -207,8 +216,8 @@ actual_relate_app = data_recommend[data_recommend['Kemiripan (%)'] >= similarity
 precision_percent = precision_at_k(data_recommend, actual_relate_app, k=5)
 recall_percent = recall_at_k(data_recommend, actual_relate_app, k=5)
 
-print(f"Precision at 10: {precision_percent:.2f}%")
-print(f"Recall at 10: {recall_percent:.2f}%")
+print(f"Precision at 5: {precision_percent:.2f}%")
+print(f"Recall at 5: {recall_percent:.2f}%")
 
 """**Kesimpulan**
 
