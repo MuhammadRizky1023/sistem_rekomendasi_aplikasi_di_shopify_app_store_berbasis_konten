@@ -180,6 +180,7 @@ Hasil Evaluasi dengan Materix Precision at 5: 100.00% serta Recall at 5: 55.56%
 - **Precision at K**:  Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas.
 - **Recall at K**: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan.
 
+Hasil evaluasi sistem rekomendasi menunjukkan bahwa Precision at 5 mencapai 100.00%, yang berarti semua 5 aplikasi yang direkomendasikan oleh sistem adalah relevan dan sesuai dengan preferensi pengguna. Ini menandakan bahwa sistem sangat akurat dalam memberikan rekomendasi. Namun, Recall at 5 hanya mencapai 55.56%, menunjukkan bahwa dari semua aplikasi yang relevan, hanya sekitar 56% yang berhasil direkomendasikan dalam 5 aplikasi teratas. Hal ini menunjukkan bahwa meskipun rekomendasi yang diberikan sangat tepat, sistem mungkin tidak berhasil menangkap semua aplikasi yang relevan, sehingga ada ruang untuk perbaikan dalam meningkatkan jangkauan rekomendasi.
 ### Dampak Model Terhadap Tujuan Bisnis
 Evaluasi menunjukkan bahwa model memberikan rekomendasi produk yang cukup relevan. Dampak pada Business Understanding:
 - Model ini berhasil menjawab problem statement dengan memberikan rekomendasi aplikasi yang serupa dari segi fungsi.
