@@ -124,11 +124,12 @@ Precision at 5: 100.00%
 Recall at 5: 55.56%
 - **Precision at K**:  Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas.
 - **Recall at K**: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan.
+- 
 Evaluasi menunjukkan bahwa model memberikan rekomendasi produk yang cukup relevan. Dampak pada Business Understanding:
-
-  -  Model ini berhasil menjawab problem statement dengan memberikan rekomendasi aplikasi yang serupa dari segi fungsi.
-    Rekomendasi yang relevan mampu meningkatkan keterlibatan pengguna dan mendukung goals untuk memudahkan pengguna menemukan aplikasi sesuai kebutuhan.
-  -  Solusi ini berdampak positif pada pengalaman pengguna dan dapat meningkatkan waktu mereka di platform Shopify.
+- Model ini berhasil menjawab problem statement dengan memberikan rekomendasi aplikasi yang serupa dari segi fungsi.
+  Rekomendasi yang relevan mampu meningkatkan keterlibatan pengguna dan mendukung goals untuk memudahkan pengguna menemukan aplikasi sesuai kebutuhan.
+-  Solusi ini berdampak positif pada pengalaman pengguna dan dapat meningkatkan waktu mereka di platform Shopify.
+- 
 
 ## Conclusion
 Kesimpulan dari proyek sistem rekomendasi aplikasi Shopify ini menunjukkan bahwa pendekatan berbasis konten dapat secara efektif mengidentifikasi aplikasi yang memiliki kesamaan fitur atau fungsi yang tinggi, sesuai dengan kebutuhan pengguna. Dengan menghitung kemiripan menggunakan Cosine Similarity, sistem ini mampu memberikan daftar rekomendasi aplikasi dengan tingkat kemiripan tertentu, membantu pengguna menemukan aplikasi yang relevan tanpa harus mencari secara manual. Evaluasi yang dilakukan melalui metrik precision dan recall menunjukkan seberapa baik model ini dalam merekomendasikan aplikasi yang benar-benar relevan, meskipun tantangan seperti ketersediaan data perilaku pengguna tetap menjadi keterbatasan.
