@@ -69,7 +69,7 @@ Pendekatan Content-Based Filtering menganalisis kesamaan antara fitur aplikasi (
      from sklearn.metrics.pairwise import cosine_similarity
      import pandas as pd
 ### Menghitung Cosine Similarity
-   cosine_sim = cosine_similarity(matrix_vector, matrix_vector)
+     cosine_sim = cosine_similarity(matrix_vector, matrix_vector)
 
 ### Fungsi Rekomendasi
     def recommend_apps(app_title, cosine_sim=cosine_sim, df_apps=df_apps):
