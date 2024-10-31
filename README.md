@@ -65,14 +65,27 @@ Content-Based Filtering menganalisis kesamaan antara fitur aplikasi (seperti kat
 - **TF-IDF Vectorization**: Teknik ini digunakan untuk mengubah deskripsi aplikasi menjadi vektor, sehingga kesamaan antar aplikasi dapat dihitung.
 - **Cosine Similarity**: Cosine Similarity digunakan untuk mengukur kesamaan antara aplikasi yang telah diberi rating tinggi oleh pengguna dan aplikasi lainnya. Aplikasi dengan skor kemiripan tertinggi kemudian direkomendasikan.
 
-## Evaluation
-Model dievaluasi dengan melihat relevansi rekomendasi yang diberikan menggunakan metrik **Precision** dan **Recall** untuk menilai seberapa sesuai rekomendasi yang dihasilkan oleh model.
+## Evaluation Model
+menampilkan hasil rekomendasi beserta kemiripannya dengan model yang telah di buat
+Rekomendasi untuk 'JewelExchange Product Feed API':
+                            judul  Kemiripan (%)
+0                     Search Veil          83.86
+1          Affiliate Product Feed          82.82
+2                    Feeds Bridge          78.68
+3     Auto Hide Sold‑out Products          78.56
+4                  Nostock‑Noshow          78.44
+5       IconEcom: Print On Demand          77.74
+6   Push Down & Hide Out of Stock          76.49
+7        Simple Bulk Price Editor          76.37
+8    Ablestar Bulk Product Editor          75.13
+9      Nada: Sort & Hide Sold‑out          74.71
+10                    Blog Linker          73.88
 
-### Hasil Evaluasi
-Content-Based Filtering menunjukkan hasil yang baik dalam memberikan rekomendasi aplikasi yang mirip dengan preferensi pengguna, khususnya aplikasi dengan deskripsi, kategori, dan rating yang serupa.
+### Evaluation Model dengan matrix Precision at K, Recall at K
+precision at k: Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas, dinyatakan dalam persen. recall at k: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan, juga dalam bentuk persen.
 
 ## Conclusion
-Proyek ini berhasil mengembangkan sistem rekomendasi berbasis Content-Based Filtering untuk meningkatkan pengalaman pelanggan di Shopify. Model ini mampu memberikan saran aplikasi yang relevan berdasarkan karakteristik aplikasi yang disukai pengguna sebelumnya.
+Kesimpulan dari proyek sistem rekomendasi aplikasi Shopify ini menunjukkan bahwa pendekatan berbasis konten dapat secara efektif mengidentifikasi aplikasi yang memiliki kesamaan fitur atau fungsi yang tinggi, sesuai dengan kebutuhan pengguna. Dengan menghitung kemiripan menggunakan Cosine Similarity, sistem ini mampu memberikan daftar rekomendasi aplikasi dengan tingkat kemiripan tertentu, membantu pengguna menemukan aplikasi yang relevan tanpa harus mencari secara manual. Evaluasi yang dilakukan melalui metrik precision dan recall menunjukkan seberapa baik model ini dalam merekomendasikan aplikasi yang benar-benar relevan, meskipun tantangan seperti ketersediaan data perilaku pengguna tetap menjadi keterbatasan.
 
 
 
