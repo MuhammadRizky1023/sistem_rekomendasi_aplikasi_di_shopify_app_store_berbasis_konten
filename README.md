@@ -173,7 +173,7 @@ Precision at 5: 100.00%
 Recall at 5: 55.56%
 
 
-## Evaluation Result
+## Evaluation Model
 
 Hasil Evaluasi dengan Materix Precision at 5: 100.00% serta Recall at 5: 55.56%
 
