@@ -34,13 +34,14 @@ Dataset yang digunakan mencakup data aplikasi Shopify, termasuk informasi sepert
 - **Duplikat**: Tidak ditemukan data duplikat dalam dataset.
 
 ## Exploratory Data Analysis (EDA)
-EDA bertujuan untuk memahami karakteristik dan pola dalam data, seperti distribusi rating aplikasi, jumlah ulasan, dan kategori aplikasi yang populer.
+EDA bertujuan untuk memahami karakteristik dan pola dalam data, seperti distribusi rating aplikasi, jumlah ulasan yang telah di terima.
 
-### Distribusi Aplikasi Populer
-Distribusi aplikasi yang populer menunjukkan aplikasi mana yang paling sering diberi rating tinggi oleh pelanggan, membantu mengidentifikasi tren preferensi pengguna di platform.
+### Distribusi bedasarkan rating
+![distribusi_rating](https://github.com/user-attachments/assets/c4e18652-b3d3-46fe-afd7-ab996db6873f)
 
-### Korelasi Antar Fitur
-Korelasi antara fitur seperti **rating** dan **reviews_count** memberikan wawasan lebih lanjut tentang popularitas dan kualitas aplikasi di Shopify.
+### Distribusi bedasarkan ulasan
+![distribusi_ulasan](https://github.com/user-attachments/assets/fd1f2956-e599-4cca-af99-f4f8182377fa)
+
 
 ## Data Preparation
 Pada tahap ini, data dipersiapkan untuk digunakan dalam model rekomendasi berbasis Content-Based Filtering, termasuk pembersihan teks, encoding fitur kategorikal, dan pembuatan vektor teks.
