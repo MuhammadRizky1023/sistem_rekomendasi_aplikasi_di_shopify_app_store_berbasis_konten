@@ -36,7 +36,7 @@ Dataset ini mencakup data aplikasi Shopify, termasuk informasi seperti **id**, *
 | **tagline**        | Ringkasan singkat aplikasi                                                  | `object`     |
 | **pricing_hint**   | Informasi harga aplikasi                                                    | `object`     |
 | **lastmod**        | Tanggal terakhir aplikasi diperbarui                                         | `object`     |
-| **chat_gpt**       | Interaksi atau input yang diberikan kepada ChatGPT                          | `object`     |
+
 
 ### Kondisi Data
 - **Missing Values**: Tidak ada nilai kosong dalam dataset ini.
@@ -118,6 +118,13 @@ Cosine Similarity digunakan untuk mengukur kesamaan antara vektor aplikasi yang 
               return recommended_apps
           except IndexError:
               return "Tidak Memiliki Rekomendasi"
+              
+## Menampilkan Top-N Rekomendasi
+ memanggil fungsi di atas dengan judul aplikasi yang diinginkan untuk mendapatkan daftar rekomendasi beserta perensentase kemeripannya dengan 10 judul yang berebeda.
+# Contoh penggunaan fungsi
+#Penggunaan
+recommend_app = 'JewelExchange Product Feed API'
+recommendations = recommend_apps(recommend_app)
 
 - **TF-IDF Vectorization**: Teknik ini digunakan untuk mengubah deskripsi aplikasi menjadi vektor, sehingga kesamaan antar aplikasi dapat dihitung.
 - **Cosine Similarity**: Cosine Similarity digunakan untuk mengukur kesamaan antara aplikasi yang telah diberi rating tinggi oleh pengguna dan aplikasi lainnya. Aplikasi dengan skor kemiripan tertinggi kemudian direkomendasikan.
