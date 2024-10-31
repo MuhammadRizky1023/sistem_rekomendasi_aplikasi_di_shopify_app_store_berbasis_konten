@@ -46,6 +46,10 @@ Grafik tersebut Menunjukkan sebaran rating aplikasi yang diulas, memberi gambara
 Grafik Tersebut Distribusi ulasan membantu mengidentifikasi aplikasi yang paling populer berdasarkan interaksi pengguna. 
 ![distribusi_ulasan](https://github.com/user-attachments/assets/fd1f2956-e599-4cca-af99-f4f8182377fa)
 
+### Insight dari EDA:
+   - Sebagian besar produk memiliki rating di atas 3, menandakan bahwa produk memiliki reputasi yang baik.
+   - Produk dengan ulasan terbanyak cenderung populer dan dapat dijadikan bahan rekomendasi.
+
 ## Data Preprocessing
 Tahapan Data Preprocessing untuk menangani nilai hilang dan menghapus data duplikat. Menangani nilai yang hilang bisa dengan rata-rata atau median.
 ### Menangani nilai yang hilang
@@ -120,8 +124,10 @@ Daftar Rekomendasi Produk Berdasarkan Kemiripan
 | Ablestar Bulk Product Editor  |           75.13 |
 | Nada: Sort & Hide Sold‑out    |           74.71 |
 | Blog Linker                   |           73.88 |
+
 Precision at 5: 100.00%
 Recall at 5: 55.56%
+
 - **Precision at K**:  Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas.
 - **Recall at K**: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan.
 - 
@@ -129,7 +135,6 @@ Evaluasi menunjukkan bahwa model memberikan rekomendasi produk yang cukup releva
 - Model ini berhasil menjawab problem statement dengan memberikan rekomendasi aplikasi yang serupa dari segi fungsi.
   Rekomendasi yang relevan mampu meningkatkan keterlibatan pengguna dan mendukung goals untuk memudahkan pengguna menemukan aplikasi sesuai kebutuhan.
 -  Solusi ini berdampak positif pada pengalaman pengguna dan dapat meningkatkan waktu mereka di platform Shopify.
-- 
 
 ## Conclusion
 Kesimpulan dari proyek sistem rekomendasi aplikasi Shopify ini menunjukkan bahwa pendekatan berbasis konten dapat secara efektif mengidentifikasi aplikasi yang memiliki kesamaan fitur atau fungsi yang tinggi, sesuai dengan kebutuhan pengguna. Dengan menghitung kemiripan menggunakan Cosine Similarity, sistem ini mampu memberikan daftar rekomendasi aplikasi dengan tingkat kemiripan tertentu, membantu pengguna menemukan aplikasi yang relevan tanpa harus mencari secara manual. Evaluasi yang dilakukan melalui metrik precision dan recall menunjukkan seberapa baik model ini dalam merekomendasikan aplikasi yang benar-benar relevan, meskipun tantangan seperti ketersediaan data perilaku pengguna tetap menjadi keterbatasan.
