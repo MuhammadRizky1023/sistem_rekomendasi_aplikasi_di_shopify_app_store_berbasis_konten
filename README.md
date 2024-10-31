@@ -127,7 +127,7 @@ Menghasilkan daftar judul aplikasi yang mirip dan skor kemiripan yang telah dibu
      recommended_apps = pd.DataFrame({
     'judul': df_apps['title'].iloc[title_similirarity].values,
     'Kemiripan (%)': simililarity_scores
-})
+    })
 
 Membuat DataFrame baru yang berisi dua kolom: judul aplikasi dan skor kemiripan.
 
@@ -146,11 +146,10 @@ Menangani kesalahan jika aplikasi yang dicari tidak ada dalam DataFrame dan meng
 
 ## Model Result
 menampilkan hasil rekomendasi beserta kemiripannya dengan model yang telah di buat
-   #Penggunaan
-   recommend_app = 'JewelExchange Product Feed API'
-   recommendations = recommend_apps(recommend_app)
+      #Penggunaan
+      recommend_app = 'JewelExchange Product Feed API'
+      recommendations = recommend_apps(recommend_app)
 
-    
 Mencetak judul untuk hasil rekomendasi dan menampilkan DataFrame dalam format tabel markdown
    
 ### Menampilkan Top-N Rekomendasi
