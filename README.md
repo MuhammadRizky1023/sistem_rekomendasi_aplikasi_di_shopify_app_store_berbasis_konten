@@ -66,21 +66,26 @@ Content-Based Filtering menganalisis kesamaan antara fitur aplikasi (seperti kat
 - **Cosine Similarity**: Cosine Similarity digunakan untuk mengukur kesamaan antara aplikasi yang telah diberi rating tinggi oleh pengguna dan aplikasi lainnya. Aplikasi dengan skor kemiripan tertinggi kemudian direkomendasikan.
 
 ## Evaluation Model
-menampilkan hasil rekomendasi beserta kemiripannya dengan model yang telah di buat
-Rekomendasi untuk 'JewelExchange Product Feed API':
-                            judul  Kemiripan (%)
-0                     Search Veil          83.86
-1          Affiliate Product Feed          82.82
-2                    Feeds Bridge          78.68
-3     Auto Hide Sold‑out Products          78.56
-4                  Nostock‑Noshow          78.44
-5       IconEcom: Print On Demand          77.74
-6   Push Down & Hide Out of Stock          76.49
-7        Simple Bulk Price Editor          76.37
-8    Ablestar Bulk Product Editor          75.13
-9      Nada: Sort & Hide Sold‑out          74.71
-10                    Blog Linker          73.88
+menampilkan hasil rekomendasi beserta kemiripannya dengan model yang telah di buat.
+# JewelExchange Product Feed API Recommendation
 
+Rekomendasi berikut disusun berdasarkan tingkat kemiripan aplikasi dengan *JewelExchange Product Feed API*, bertujuan untuk membantu pengguna menemukan alternatif produk atau fitur serupa di platform Shopify. Aplikasi-aplikasi ini memiliki kemiripan dalam fungsi pengelolaan produk, manajemen stok, dan integrasi feed.
+
+## Daftar Rekomendasi Produk Berdasarkan Kemiripan
+
+| **Judul**                          | **Kemiripan (%)** |
+|------------------------------------|--------------------|
+| Search Veil                        | 83.86             |
+| Affiliate Product Feed             | 82.82             |
+| Feeds Bridge                       | 78.68             |
+| Auto Hide Sold‑out Products        | 78.56             |
+| Nostock‑Noshow                     | 78.44             |
+| IconEcom: Print On Demand          | 77.74             |
+| Push Down & Hide Out of Stock      | 76.49             |
+| Simple Bulk Price Editor           | 76.37             |
+| Ablestar Bulk Product Editor       | 75.13             |
+| Nada: Sort & Hide Sold‑out         | 74.71             |
+| Blog Linker                        | 73.88             |
 ### Evaluation Model dengan matrix Precision at K, Recall at K
 precision at k: Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas, dinyatakan dalam persen. recall at k: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan, juga dalam bentuk persen.
 
