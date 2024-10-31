@@ -175,6 +175,8 @@ Recall at 5: 55.56%
 
 ## Evaluation Result
 
+Hasil Evaluasi dengan Materix Precision at 5: 100.00% serta Recall at 5: 55.56%
+
 - **Precision at K**:  Menghitung berapa banyak rekomendasi yang relevan di antara K rekomendasi teratas.
 - **Recall at K**: Menghitung berapa banyak item relevan yang ter-rekomendasi di antara K rekomendasi teratas terhadap total item relevan.
 
